@@ -8,6 +8,8 @@ A modal and drawer component for React 19. It can open centered or slide in from
 - Locks page scrolling while any modal is open. Only the modal body scrolls, including when several modals are stacked.
 - Light and dark themes through CSS custom properties.
 
+**[Live playground →](https://farena.github.io/fa-modal-react/)** Try every position and size, plus stacked modals.
+
 ## Installation
 
 ```bash
@@ -173,13 +175,13 @@ You can target these classes for further customization:
 
 ```bash
 npm install
-npm run dev     # playground with every position, size and a nested modal
+npm run dev       # playground with every position, size and a nested modal
 npm run build     # type-check and build the playground
 npm run build:lib # build the package into dist/
 npm run lint
 ```
 
-The playground lives in `src/App.tsx`.
+The playground lives in `src/App.tsx`. Every push to `main` deploys it to [GitHub Pages](https://farena.github.io/fa-modal-react/) through `.github/workflows/pages.yml`.
 
 ### Releasing
 
@@ -191,3 +193,7 @@ npm run release -- patch --dry-run  # run every check and show the package conte
 ```
 
 The script checks that the working tree is clean and that you are logged in to npm. It then runs lint and both builds, bumps the version (commit + `vX.Y.Z` tag), publishes, and pushes the commit and tag when an `origin` remote exists.
+
+## License
+
+[MIT](LICENSE) © Federico Arena

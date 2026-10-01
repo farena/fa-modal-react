@@ -8,6 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` — type-check (`tsc -b`) and production build. This is the main correctness check.
 - `npm run lint` — ESLint (typescript-eslint, react-hooks, react-refresh).
 - `npm run build:lib` — builds the npm package into `dist/` (`vite.lib.config.ts` for JS + `style.css`, `tsconfig.lib.json` for `.d.ts`). The playground build goes to `dist-playground/` so the two don't collide.
+- GitHub Pages: `.github/workflows/pages.yml` builds the playground with `--base=/fa-modal-react/` and deploys `dist-playground/` on every push to `main`. Rename the base if the repo name changes.
 - `npm run release -- <patch|minor|major|x.y.z> [--dry-run]` — `scripts/release.mjs`: requires clean `main` and `npm login`, runs lint + both builds, `npm version`, `npm publish` (as `@farena/fa-modal-react`, public), then pushes with tags if `origin` exists.
 
 There is no test runner configured. Verify behavior through the playground in a browser.

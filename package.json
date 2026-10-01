@@ -2,6 +2,13 @@
   "name": "@farena/fa-modal-react",
   "version": "0.0.0",
   "description": "Animated modal and drawer component for React 19, with five positions, five sizes and stacking support.",
+  "homepage": "https://farena.github.io/fa-modal-react/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farena/fa-modal-react.git"
+  },
+  "license": "MIT",
+  "author": "Federico Arena",
   "type": "module",
   "files": [
     "dist"
