@@ -1,0 +1,198 @@
+:root {
+  --fa-modals-text: #292a2b;
+  --fa-modals-bg: #fff;
+  --fa-modals-bghover: #cacaca77;
+  --fa-modals-border: #ccc;
+  --fa-modals-shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --fa-modals-radius: 0.25em;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fa-modals-text: #9ca3af;
+    --fa-modals-bg: #16171d;
+    --fa-modals-bghover: #3535357c;
+    --fa-modals-border: #2e303a;
+    --fa-modals-shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+}
+
+.fa-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: rgba(0, 0, 0, 0);
+  color: var(--fa-modals-text);
+  transition: background-color 0.3s ease-in-out;
+
+  &--open {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  // Sizes set the content width in every position; the height follows the content.
+  &.fa-modal-size--xs {
+    --fa-modal-width: 300px;
+  }
+
+  &.fa-modal-size--sm {
+    --fa-modal-width: 450px;
+  }
+
+  &.fa-modal-size--md {
+    --fa-modal-width: 800px;
+  }
+
+  &.fa-modal-size--lg {
+    --fa-modal-width: 1200px;
+  }
+
+  &.fa-modal-size--xl {
+    --fa-modal-width: 100%;
+  }
+
+  .fa-modal-content {
+    box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    max-height: 100%;
+    background: var(--fa-modals-bg);
+    box-shadow: var(--fa-modals-shadow);
+    overflow: hidden;
+    // FaModal fires onClose on the transform transition end, so every position must animate transform.
+    transition:
+      transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out;
+
+    &--open {
+      transition-delay: 0.4s;
+    }
+
+    &__header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.75em;
+      // Room for the absolutely positioned close button, even when the header is empty.
+      min-height: calc(44px + 1em);
+      box-sizing: border-box;
+      padding: 0.75em calc(44px + 1em) 0.75em 1em;
+      border-bottom: 1px solid var(--fa-modals-border);
+
+      &-closebtn {
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
+        display: grid;
+        place-items: center;
+        padding: 0 0.25em;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        color: inherit;
+        font-size: 1.5em;
+        line-height: 1;
+        cursor: pointer;
+        height: 44px;
+        width: 44px;
+
+        &:hover {
+          background: var(--fa-modals-bghover);
+        }
+      }
+    }
+
+    &__body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 0 1em;
+    }
+
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75em;
+      padding: 0.75em 1em;
+      border-top: 1px solid var(--fa-modals-border);
+    }
+  }
+
+  &.fa-modal-position--center {
+    display: grid;
+    place-items: center;
+    padding: 1em;
+
+    .fa-modal-content {
+      position: relative;
+      width: var(--fa-modal-width);
+      max-height: calc(100dvh - 2em);
+      border: 1px solid var(--fa-modals-border);
+      border-radius: var(--fa-modals-radius);
+      opacity: 0;
+      transform: translateY(1.5em) scale(0.96);
+    }
+
+    .fa-modal-content--open {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  &.fa-modal-position--right .fa-modal-content {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--fa-modal-width);
+    border-left: 1px solid var(--fa-modals-border);
+    transform: translateX(100%);
+  }
+
+  &.fa-modal-position--left .fa-modal-content {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--fa-modal-width);
+    border-right: 1px solid var(--fa-modals-border);
+    transform: translateX(-100%);
+  }
+
+  &.fa-modal-position--top .fa-modal-content,
+  &.fa-modal-position--bottom .fa-modal-content {
+    right: 0;
+    left: 0;
+    width: var(--fa-modal-width);
+    height: fit-content;
+    margin-inline: auto;
+    border: 1px solid var(--fa-modals-border);
+  }
+
+  &.fa-modal-position--top .fa-modal-content {
+    top: 0;
+    border-top: none;
+    border-radius: 0 0 var(--fa-modals-radius) var(--fa-modals-radius);
+    transform: translateY(-100%);
+  }
+
+  &.fa-modal-position--bottom .fa-modal-content {
+    bottom: 0;
+    border-bottom: none;
+    border-radius: var(--fa-modals-radius) var(--fa-modals-radius) 0 0;
+    transform: translateY(100%);
+  }
+
+  &.fa-modal-position--right,
+  &.fa-modal-position--left,
+  &.fa-modal-position--top,
+  &.fa-modal-position--bottom {
+    .fa-modal-content--open {
+      transform: none;
+    }
+  }
+}
